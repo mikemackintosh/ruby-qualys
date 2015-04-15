@@ -1,7 +1,7 @@
 # Ruby Qualys API v2
 A Ruby extension for interfacing with Qualys v2 API.
 
-[![](http://ruby-gem-downloads-badge.herokuapp.com/qualys)](https://rubygems.org/gems/qualys)
+[![](http://ruby-gem-downloads-badge.herokuapp.com/qualys?type=total)](https://rubygems.org/gems/qualys)
 
 [![Dependency Status](https://gemnasium.com/mikemackintosh/ruby-qualys.svg)](https://gemnasium.com/mikemackintosh/ruby-qualys)
 
