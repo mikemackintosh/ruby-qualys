@@ -9,6 +9,8 @@ require 'qualys/api'
 require 'qualys/auth'
 
 require 'qualys/scans'
+require 'qualys/compliance'
+require 'qualys/reports'
 
 
 module Qualys

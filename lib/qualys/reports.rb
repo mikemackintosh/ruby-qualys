@@ -1,14 +1,15 @@
 module Qualys
-  class Scans < Api
+  class Reports < Api
 
     def self.all
-      response = api_get("scan/", { :query => { :action => 'list' }} )
+      response = api_get("report/", { :query => { :action => 'list' }} )
+      puts response.parsed_response.inspect
       unless response.parsed_response['SCAN_LIST_OUTPUT']['RESPONSE'].has_key? 'SCAN_LIST'
         return []
       end
 
-      scanlist = response.parsed_response['SCAN_LIST_OUTPUT']['RESPONSE']['SCAN_LIST']['SCAN']
-      scanlist.map!{|scan| Scan.new(scan)}
+      #scanlist = response.parsed_response['SCAN_LIST_OUTPUT']['RESPONSE']['SCAN_LIST']['SCAN']
+      #scanlist.map!{|scan| Scan.new(scan)}
 
     end
 
@@ -18,7 +19,7 @@ module Qualys
 
   end
 
-  class Scan
+  class Report
 
     attr_accessor :ref, :title, :type, :date, :duration, :status, :target, :user
 
