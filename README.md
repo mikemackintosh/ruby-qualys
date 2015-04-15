@@ -45,6 +45,17 @@ You can easily get a list of all scans within your Qualys account by accessing t
 
 ```ruby
 scans = Qualys::Scans.all
+  #-> [#<Qualys::Scan:0x007fad4c4645c8 @ref="scan/refid", @title="Scan Title", @type="Scheduled", @date="2015-04-15T12:02:12Z", @duration="01:51:38", @status="Finished", @target="ip ranges", @user="managing_user">...
+```
+
+You can get more details from each scan like:
+
+```ruby
+scans = Qualys::Scans.all
+puts scans.first.details
+  #-> {"ip"=>"x.x.x.x", "dns"=>"mikemackintosh.com", "netbios"=>nil, "qid"=>86000, "result"=>"Server Version\tServer Banner\nnginx\tnginx", "protocol"=>"tcp", "port"=>"80", "ssl"=>"no", "fqdn"=>""}, 
+  #   {"ip"=>"x.x.x.x", "dns"=>"mikemackintosh.com", "netbios"=>nil, "qid"=>86189, "result"=>"Number of web servers behind load balancer:\n2 - based on IP Identification values", "protocol"=>"tcp", "port"=>"80", "ssl"=>"no", "fqdn"=>""}, 
+  #  {"ip"=>"x.x.x.x, "dns"=>"mikemackintosh.com", "netbios"=>nil, "qid"=>86001, "result"=>"Server Version\tServer Banner\nnginx\tnginx", "protocol"=>"tcp", "port"=>"443", "ssl"=>"no", "fqdn"=>""}
 ```
 
 ## References

@@ -16,6 +16,18 @@ module Qualys
       self.all
     end
 
+    def self.get(ref)
+      response = api_get("scan/", { 
+          :query => { 
+              :action => 'fetch', 
+              :scan_ref => ref, 
+              :mode => 'extended', 
+              :output_format => 'json' 
+        }} )
+
+      JSON.parse(response.parsed_response)
+    end
+
   end
 
   class Scan
@@ -33,14 +45,20 @@ module Qualys
       @user = scan['USER_LOGIN']
     end
 
-  end
-
-  def finished?
-    if @status.eql? 'Finished'
-      return true
+    def details
+      Scans.get(@ref)
     end
 
-    false
+    def finished?
+      if @status.eql? 'Finished'
+        return true
+      end
+
+      false
+    end
   end
 
+  class Details
+
+  end
 end
