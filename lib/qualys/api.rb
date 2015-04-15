@@ -3,7 +3,7 @@ module Qualys
 
     class InvalidResponse < RuntimeError; end
     class AuthorizationRequired < RuntimeError; end
-    class UnauthorizedRequest < RuntimeError; end
+    class Exception < RuntimeError; end
 
     # Set the current production endpoint
     PRODUCTION_ENDPOINT = 'https://qualysapi.qualys.com/api/2.0/fo/'
@@ -29,7 +29,7 @@ module Qualys
       if response.code.eql?(401)
         raise Qualys::Api::AuthorizationRequired, "Please Login Before Communicating With The API"
       elsif response.code.eql?(403)
-        raise Qualys::Api::UnauthorizedRequest, "You either sent an invalid request or do not have access to that add-on"      
+        raise Qualys::Api::Exception, response.parsed_response['SIMPLE_RETURN']['RESPONSE']['TEXT']      
       elsif !response.code.eql?(200)
         raise Qualys::Api::InvalidResponse, "Invalid Response Received"
       end
@@ -53,7 +53,7 @@ module Qualys
       if response.code.eql?(401)
         raise Qualys::Api::AuthorizationRequired, "Please Configure A Username and Password Before Communicating With The API"
       elsif response.code.eql?(403)
-        raise Qualys::Api::UnauthorizedRequest, "You either sent an invalid request or do not have access to that add-on"      
+        raise Qualys::Api::Exception, response.parsed_response['SIMPLE_RETURN']['RESPONSE']['TEXT']      
       elsif response.code.eql?(500)
         raise Qualys::Api::InvalidResponse, "Invalid Response Received"
       end

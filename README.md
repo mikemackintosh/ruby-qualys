@@ -49,4 +49,7 @@ scans = Qualys::Scans.all
 
 ## References
 
-The API was built using the following documentation: https://www.qualys.com/docs/qualys-api-v2-quick-reference.pdf
+The API was built using the following documentation: 
+
+  - https://www.qualys.com/docs/qualys-api-v2-quick-reference.pdf
+  - https://www.qualys.com/docs/qualys-api-v2-user-guide.pdf?_ga=1.246313805.857253578.1427813387
