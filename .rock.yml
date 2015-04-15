@@ -1,0 +1,17 @@
+runtime: ruby21
+build_gem: |
+  rm -rf *.gem
+  gem build qualys.gemspec
+
+push_gem: exec gem push *.gem
+
+gem: |
+  rm -rf *.gem
+  gem build qualys.gemspec
+  gem push *.gem
+
+sublime: |
+  rock run bin/test.rb
+
+todo: |
+  find bin lib spec -type f -exec grep -Hni --color "todo" {} \; > TODO
