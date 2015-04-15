@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   
   s.require_paths = ["lib"]
   s.files         = `git ls-files -z`.split("\x0")
-  s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  #s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  #s.test_files    = s.files.grep(%r{^(test|spec|features)/})
 
   s.add_dependency 'json'
   s.add_dependency 'erubis'
