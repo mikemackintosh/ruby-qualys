@@ -33,12 +33,18 @@ Qualys.configure do |config|
 end
 ```
 
-### Getting Scans
-
-You can easily get a list of all corps within your SignalSciences account by accessing the following methods:
+or configure using a `yaml` doc:
 
 ```ruby
-corps = Qualys::Scans.all
+Qualys::Config.load!("config/qualys.yaml")
+```
+
+### Getting Scans
+
+You can easily get a list of all scans within your Qualys account by accessing the following methods:
+
+```ruby
+scans = Qualys::Scans.all
 ```
 
 ## References
