@@ -38,7 +38,13 @@ or configure using a `yaml` doc:
 ```ruby
 Qualys::Config.load!("config/qualys.yaml")
 ```
+### Login
 
+Login before making other API calls:
+
+```ruby
+Qualys::Auth.login
+```
 ### Getting Scans
 
 You can easily get a list of all scans within your Qualys account by accessing the following methods:
