@@ -62,5 +62,10 @@ module Qualys
       response
     end
 
+    #
+    # Sets the base URI.
+    def self.base_uri=(base_uri)
+      HTTParty::Basement.default_options.update(base_uri: base_uri)
+    end
   end
 end
