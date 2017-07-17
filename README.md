@@ -64,6 +64,16 @@ puts scans.first.details
   #  {"ip"=>"x.x.x.x, "dns"=>"mikemackintosh.com", "netbios"=>nil, "qid"=>86001, "result"=>"Server Version\tServer Banner\nnginx\tnginx", "protocol"=>"tcp", "port"=>"443", "ssl"=>"no", "fqdn"=>""}
 ```
 
+
+### Set the URI
+
+If your URL differs from the default, set it using:
+
+```ruby
+Qualys::Api.base_uri = OTHER_PRODUCTION_ENDPOINT
+```
+
+
 ## References
 
 The API was built using the following documentation: 
