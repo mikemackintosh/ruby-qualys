@@ -1,6 +1,5 @@
 /.bundle/
 /vendor/
-Gemfile.lock
 *.gem
 /config/qualys.yaml
 .idea
