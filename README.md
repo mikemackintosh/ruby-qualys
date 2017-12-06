@@ -1,11 +1,9 @@
+[![Build Status](https://travis-ci.org/Cyberwatch/ruby-qualys.svg?branch=master)](https://travis-ci.org/Cyberwatch/ruby-qualys)
+[![Coverage Status](https://coveralls.io/repos/github/Cyberwatch/ruby-qualys/badge.svg?branch=master)](https://coveralls.io/github/Cyberwatch/ruby-qualys?branch=master)
+
 # Ruby Qualys API v2
+
 A Ruby extension for interfacing with Qualys v2 API.
-
-[![](http://ruby-gem-downloads-badge.herokuapp.com/qualys?type=total)](https://rubygems.org/gems/qualys)
-
-[![Dependency Status](https://gemnasium.com/mikemackintosh/ruby-qualys.svg)](https://gemnasium.com/mikemackintosh/ruby-qualys)
-
-[![Gem Version](https://badge.fury.io/rb/qualys.svg)](https://rubygems.org/gems/qualys)
 
 ### Introduction
 
@@ -13,11 +11,13 @@ I had the need to pull stats and details from Qualys automatically to collect an
 
 ## Installation
 
-Like any other gem:
+Add this line to your application's Gemfile:
 
-```shell
-gem install qualys
-```
+    gem 'nessus_rest', git: 'https://github.com/Cyberwatch/ruby-qualys.git'
+
+And then execute:
+
+    $ bundle
 
 ## Usage
 
