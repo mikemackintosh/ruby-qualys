@@ -7,7 +7,7 @@ module Qualys
     # Do Login
     def self.login
       # Request a login
-      response = api_post('session/', body: {
+      response = api_post('/session/', body: {
                             action: 'login',
                             username: Qualys::Config.username,
                             password: Qualys::Config.password
@@ -21,7 +21,7 @@ module Qualys
     # Set Logout
     def self.logout
       # Request a login
-      api_post('session/', body: {
+      api_post('/session/', body: {
                  action: 'logout'
                })
 
