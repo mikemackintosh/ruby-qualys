@@ -1,7 +1,7 @@
 module Qualys
   class Scans < Api
     def self.all
-      response = api_get('scan/', query: { action: 'list' })
+      response = api_get('/scan/', query: { action: 'list' })
       unless response.parsed_response['SCAN_LIST_OUTPUT']['RESPONSE'].key? 'SCAN_LIST'
         return []
       end
@@ -15,7 +15,7 @@ module Qualys
     end
 
     def self.get(ref)
-      response = api_get('scan/', query: {
+      response = api_get('/scan/', query: {
                            action: 'fetch',
                            scan_ref: ref,
                            mode: 'extended',

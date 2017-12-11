@@ -1,7 +1,7 @@
 module Qualys
   class Reports < Api
     def self.all
-      response = api_get('report/', query: { action: 'list' })
+      response = api_get('/report/', query: { action: 'list' })
       puts response.parsed_response.inspect
       unless response.parsed_response['SCAN_LIST_OUTPUT']['RESPONSE'].key? 'SCAN_LIST'
         return []
