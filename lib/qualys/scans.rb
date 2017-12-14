@@ -10,10 +10,6 @@ module Qualys
       scanlist.map! { |scan| Scan.new(scan) }
     end
 
-    def self.each
-      all
-    end
-
     def self.get(ref)
       response = api_get('/scan/', query: {
                            action: 'fetch',
