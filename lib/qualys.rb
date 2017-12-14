@@ -12,6 +12,9 @@ require 'qualys/scans'
 require 'qualys/compliance'
 require 'qualys/report'
 
+require 'qualys/host'
+require 'qualys/vulnerability'
+
 module Qualys
   extend self
 
