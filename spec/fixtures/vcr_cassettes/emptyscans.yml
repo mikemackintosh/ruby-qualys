@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://qualysapi.qualys.eu/api/2.0/fo/scan/?action=list
+    body:
+      encoding: US-ASCII
+      string: ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 11 Dec 2017 08:49:57 GMT
+      Server:
+      - Qualys
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/xml;charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!DOCTYPE SCAN_LIST_OUTPUT
+        SYSTEM \"https://qualysapi.qualys.eu/api/2.0/fo/scan/scan_list_output.dtd\">\n<!--
+        This report was generated with an evaluation version of Qualys //--> \n<SCAN_LIST_OUTPUT>\n
+        \ <RESPONSE>\n    <DATETIME>2017-12-11T08:49:57Z</DATETIME>\n   </RESPONSE>\n</SCAN_LIST_OUTPUT>\n<!--
+        This report was generated with an evaluation version of Qualys //--> \n<!--
+        CONFIDENTIAL AND PROPRIETARY INFORMATION. Qualys provides the QualysGuard
+        Service \"As Is,\" without any warranty of any kind. Qualys makes no warranty
+        that the information contained in this report is complete or error-free. Copyright
+        2017, Qualys, Inc. //--> \n"
+    http_version: 
+  recorded_at: Mon, 11 Dec 2017 08:49:57 GMT
+recorded_with: VCR 4.0.0
