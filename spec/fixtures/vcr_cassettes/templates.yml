@@ -1,0 +1,121 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://qualysapi.qualys.eu/msp/report_template_list.php
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Requested-With:
+      - Qualys Ruby Client v0.1.3
+      Authorization:
+      - Basic c2NhLW5nMTpDMjhMaWNvdGh5
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Dec 2017 08:35:17 GMT
+      Server:
+      - Qualys
+      X-Xss-Protection:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Window-Sec:
+      - '3600'
+      X-Concurrency-Limit-Limit:
+      - '2'
+      X-Concurrency-Limit-Running:
+      - '0'
+      X-Ratelimit-Towait-Sec:
+      - '0'
+      X-Ratelimit-Remaining:
+      - '298'
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/xml
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!DOCTYPE REPORT_TEMPLATE_LIST
+        SYSTEM \"https://qualysapi.qualys.eu/report_template_list.dtd\">\n<!-- This
+        report was generated with an evaluation version of Qualys //--> \n<REPORT_TEMPLATE_LIST>\n
+        \ <REPORT_TEMPLATE>\n    <ID>91078694</ID>\n    <TYPE>Auto</TYPE>\n    <TEMPLATE_TYPE>Scan</TEMPLATE_TYPE>\n
+        \   <TITLE><![CDATA[Executive Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[Thomas]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[Thomas]]></FIRSTNAME>\n      <LASTNAME><![CDATA[Trust]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078695</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Scan</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Technical Report]]></TITLE>\n
+        \   <USER>\n      <LOGIN><![CDATA[Thomas]]></LOGIN>\n      <FIRSTNAME><![CDATA[Thomas]]></FIRSTNAME>\n
+        \     <LASTNAME><![CDATA[Trust]]></LASTNAME>\n    </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n
+        \   <GLOBAL>1</GLOBAL>\n  </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078696</ID>\n
+        \   <TYPE>Auto</TYPE>\n    <TEMPLATE_TYPE>Patch</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Qualys
+        Patch Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[Thomas]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[Thomas]]></FIRSTNAME>\n      <LASTNAME><![CDATA[Trust]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078697</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Scan</TEMPLATE_TYPE>\n    <TITLE><![CDATA[High Severity
+        Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[Thomas]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[Thomas]]></FIRSTNAME>\n      <LASTNAME><![CDATA[Trust]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078698</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Compliance</TEMPLATE_TYPE>\n    <TITLE><![CDATA[2008 SANS
+        Top 20 Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078699</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Compliance</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Qualys
+        Top 20 Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078700</ID>\n    <TYPE>Manual</TYPE>\n
+        \   <TEMPLATE_TYPE>Compliance</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Payment
+        Card Industry (PCI) Technical Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078701</ID>\n    <TYPE>Manual</TYPE>\n
+        \   <TEMPLATE_TYPE>Compliance</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Payment
+        Card Industry (PCI) Executive Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078702</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Remediation</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Executive
+        Remediation Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078703</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Remediation</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Tickets
+        per Vulnerability]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078704</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Remediation</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Tickets
+        per User]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078705</ID>\n    <TYPE>Auto</TYPE>\n
+        \   <TEMPLATE_TYPE>Remediation</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Tickets
+        per Asset Group]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[System]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[System]]></FIRSTNAME>\n      <LASTNAME><![CDATA[System]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:01:57Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n  <REPORT_TEMPLATE>\n    <ID>91078709</ID>\n    <TYPE>Manual</TYPE>\n
+        \   <TEMPLATE_TYPE>Map</TEMPLATE_TYPE>\n    <TITLE><![CDATA[Unknown Device
+        Report]]></TITLE>\n    <USER>\n      <LOGIN><![CDATA[Thomas]]></LOGIN>\n
+        \     <FIRSTNAME><![CDATA[Thomas]]></FIRSTNAME>\n      <LASTNAME><![CDATA[Trust]]></LASTNAME>\n
+        \   </USER>\n    <LAST_UPDATE>2017-11-23T15:02:01Z</LAST_UPDATE>\n    <GLOBAL>1</GLOBAL>\n
+        \ </REPORT_TEMPLATE>\n</REPORT_TEMPLATE_LIST>\n<!-- This report was generated
+        with an evaluation version of Qualys //--> \n<!-- CONFIDENTIAL AND PROPRIETARY
+        INFORMATION. Qualys provides the QualysGuard Service \"As Is,\" without any
+        warranty of any kind. Qualys makes no warranty that the information contained
+        in this report is complete or error-free. Copyright 2017, Qualys, Inc. //-->
+        \n"
+    http_version: 
+  recorded_at: Tue, 12 Dec 2017 08:35:18 GMT
+recorded_with: VCR 4.0.0
