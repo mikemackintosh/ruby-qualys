@@ -5,13 +5,20 @@ module Qualys
   class Report < Api
     attr_accessor :header, :host_list, :glossary, :appendices
 
+    # accepted timeout in seconds
+    TIMEOUT = 60.0
+
     class << self
       def find_by_id(id)
         response = api_get('/report/', query: {
                              action: 'fetch',
                              id: id
                            })
-        response.parsed_response
+
+        # check if report exist
+        return unless response.parsed_response.keys.include?('ASSET_DATA_REPORT')
+
+        Report.new(response.parsed_response)
       end
 
       # returns the list of the templates
@@ -42,13 +49,42 @@ module Qualys
 
         response.parsed_response['SIMPLE_RETURN']['RESPONSE']['ITEM_LIST']['ITEM']['VALUE']
       end
+
+      # returns a report global report object.
+      # This method can be time consuming and times out after 64 s
+      def global_report
+        report_id = create_global_report
+        report = find_by_id(report_id)
+
+        10.times do
+          sleep(TIMEOUT / 10)
+          report = find_by_id(report_id)
+          break unless report.nil?
+        end
+
+        raise Qualys::Report::Exception, 'Report generation timed out' if report.nil?
+
+        delete(report_id)
+        report
+      end
     end
 
     def initialize(report)
-      @header = report['HEADER']
-      @host_list = report['HOST_LIST']['HOST']
-      @glossary = report['GLOSSARY']['VULN_DETAILS_LIST']['VULN_DETAILS']
-      @appendices = report['APPENDICES']
+      @header = report['ASSET_DATA_REPORT']['HEADER']
+      @host_list = report['ASSET_DATA_REPORT']['HOST_LIST']['HOST']
+      @glossary = report['ASSET_DATA_REPORT']['GLOSSARY']['VULN_DETAILS_LIST']['VULN_DETAILS']
+      @appendices = report['ASSET_DATA_REPORT']['APPENDICES']
+    end
+
+    def hosts
+      hosts ||= host_list.map do |xml_host|
+        vulnerabilities = xml_host['VULN_INFO_LIST']['VULN_INFO'].map do |vuln|
+          Qualys::Vulnerability.new(vuln, @glossary)
+        end
+        Qualys::Host.new(xml_host, vulnerabilities)
+      end
+
+      hosts
     end
   end
 end

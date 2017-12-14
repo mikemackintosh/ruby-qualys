@@ -31,7 +31,7 @@ Style/Documentation:
     - 'lib/qualys/auth.rb'
     - 'lib/qualys/compliance.rb'
     - 'lib/qualys/config.rb'
-    - 'lib/qualys/reports.rb'
+    - 'lib/qualys/report.rb'
     - 'lib/qualys/scans.rb'
 
 # Offense count: 13
