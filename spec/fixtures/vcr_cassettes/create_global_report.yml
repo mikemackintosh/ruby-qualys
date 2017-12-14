@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://qualysapi.qualys.eu/api/2.0/fo/report/?action=launch&output_format=xml&report_title=Generated_by_Ruby_Qualys_gem&report_type=Scan&template_id=91078695
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Requested-With:
+      - Qualys Ruby Client v0.1.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Dec 2017 09:59:59 GMT
+      Server:
+      - Qualys
+      X-Xss-Protection:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Window-Sec:
+      - '3600'
+      X-Concurrency-Limit-Limit:
+      - '2'
+      X-Concurrency-Limit-Running:
+      - '0'
+      X-Ratelimit-Towait-Sec:
+      - '0'
+      X-Ratelimit-Remaining:
+      - '293'
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/xml;charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE SIMPLE_RETURN SYSTEM "https://qualysapi.qualys.eu/api/2.0/simple_return.dtd">
+        <SIMPLE_RETURN>
+          <RESPONSE>
+            <DATETIME>2017-12-12T09:59:59Z</DATETIME>
+            <TEXT>New report launched</TEXT>
+            <ITEM_LIST>
+              <ITEM>
+                <KEY>ID</KEY>
+                <VALUE>4888438</VALUE>
+              </ITEM>
+            </ITEM_LIST>
+          </RESPONSE>
+        </SIMPLE_RETURN>
+    http_version: 
+  recorded_at: Tue, 12 Dec 2017 10:00:00 GMT
+recorded_with: VCR 4.0.0

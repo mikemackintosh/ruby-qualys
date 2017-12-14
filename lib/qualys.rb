@@ -10,7 +10,7 @@ require 'qualys/auth'
 
 require 'qualys/scans'
 require 'qualys/compliance'
-require 'qualys/reports'
+require 'qualys/report'
 
 module Qualys
   extend self
