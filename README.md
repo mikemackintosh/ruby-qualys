@@ -13,7 +13,7 @@ I had the need to pull stats and details from Qualys automatically to collect an
 
 Add this line to your application's Gemfile:
 
-    gem 'nessus_rest', git: 'https://github.com/Cyberwatch/ruby-qualys.git'
+    gem 'ruby-qualys', git: 'https://github.com/Cyberwatch/ruby-qualys.git'
 
 And then execute:
 
