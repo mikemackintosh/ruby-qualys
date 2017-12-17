@@ -8,7 +8,7 @@ require 'qualys/version'
 Gem::Specification.new do |s|
   s.name        = 'qualys'
   s.version     = Qualys::VERSION
-  s.date        = '2015-02-25'
+  s.date        = '2017-12-17'
   s.summary     = 'qualys API Client'
   s.description = 'Easily interface with the qualys for consuming events'
   s.authors     = ['Mike Mackintosh']
