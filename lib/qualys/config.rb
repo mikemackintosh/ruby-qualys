@@ -26,10 +26,8 @@ module Qualys
     #
     # @param [ String ] path The path to the file.
     def load!(path)
-      settings = YAML.load(ERB.new(File.new(path).read).result)['api']
-      if settings.is_a? Hash
-        from_hash(settings)
-      end
+      settings = YAML.safe_load(ERB.new(File.new(path).read).result)['api']
+      from_hash(settings) if settings.is_a? Hash
     end
   end
 end

@@ -1,71 +1,62 @@
 module Qualys
   class Api
-
     class InvalidResponse < RuntimeError; end
     class AuthorizationRequired < RuntimeError; end
     class Exception < RuntimeError; end
 
     # Set the current production endpoint
-    PRODUCTION_ENDPOINT = 'https://qualysapi.qualys.com/api/2.0/fo/'
+    PRODUCTION_ENDPOINT = 'https://qualysapi.qualys.com/api/2.0/fo/'.freeze
 
     # Set HTTParty defaults
     HTTParty::Basement.default_options.update(base_uri: PRODUCTION_ENDPOINT)
     HTTParty::Basement.default_options.update(headers: {
-        "X-Requested-With" => "Qualys Ruby Client v#{Qualys::VERSION}"
-      })
+                                                'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}"
+                                              })
 
-    #
-    #
-    def self.api_get(url, options={})
+    class << self
+      def api_get(url, options = {})
+        HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key) unless Qualys::Config.session_key.nil?
 
-      unless Qualys::Config.session_key.nil?
-        HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key)
+        # Send Request
+        response = HTTParty.get(url, options)
+
+        # Check if you need to be authorized
+        check_response(response)
+        # return the response
+        response
       end
 
-      # Send Request
-      response = HTTParty.get(url, options)
+      #
+      #
+      def api_post(url, options = {})
+        HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key) unless Qualys::Config.session_key.nil?
 
-      # Check if you need to be authorized
-      if response.code.eql?(401)
-        raise Qualys::Api::AuthorizationRequired, "Please Login Before Communicating With The API"
-      elsif response.code.eql?(403)
-        raise Qualys::Api::Exception, response.parsed_response['SIMPLE_RETURN']['RESPONSE']['TEXT']      
-      elsif !response.code.eql?(200)
-        raise Qualys::Api::InvalidResponse, "Invalid Response Received"
+        # Send Request
+        response = HTTParty.post(url, options)
+
+        # Check if you need to be authorized
+        check_response(response)
+        # return the response
+        response
       end
 
-      # return the response
-      response
-    end
-
-    #
-    #
-    def self.api_post(url, options={})
-      
-      unless Qualys::Config.session_key.nil?
-        HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key)
+      #
+      # Sets the base URI.
+      def base_uri=(base_uri)
+        HTTParty::Basement.default_options.update(base_uri: base_uri)
       end
 
-      # Send Request
-      response = HTTParty.post(url, options)
+      private
 
-      # Check if you need to be authorized
-      if response.code.eql?(401)
-        raise Qualys::Api::AuthorizationRequired, "Please Configure A Username and Password Before Communicating With The API"
-      elsif response.code.eql?(403)
-        raise Qualys::Api::Exception, response.parsed_response['SIMPLE_RETURN']['RESPONSE']['TEXT']      
-      elsif response.code.eql?(500)
-        raise Qualys::Api::InvalidResponse, "Invalid Response Received"
+      def check_response(response)
+        code = response.code
+        raise(Qualys::Api::AuthorizationRequired, 'Please Login Before Communicating With The API') if code.eql?(401)
+        raise(Qualys::Api::Exception, response.parsed_response['SIMPLE_RETURN']['RESPONSE']['TEXT']) if code.eql?(403)
+        unless code.eql?(200)
+          raise(Qualys::Api::InvalidResponse, 'Invalid Response Received' + response.code.to_s + ' ' +
+              response.request.last_uri.to_s)
+        end
       end
-
-      # return the response
-      response
-    end
-
-    #
-    # Sets the base URI.
-    def self.base_uri=(base_uri)
-      HTTParty::Basement.default_options.update(base_uri: base_uri)
     end
   end
 end

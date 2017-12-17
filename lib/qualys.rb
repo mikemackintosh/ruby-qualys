@@ -10,23 +10,22 @@ require 'qualys/auth'
 
 require 'qualys/scans'
 require 'qualys/compliance'
-require 'qualys/reports'
+require 'qualys/report'
 
+require 'qualys/host'
+require 'qualys/vulnerability'
 
 module Qualys
-
   extend self
 
   def configure
     block_given? ? yield(Config) : Config
-    %w(username password).each do |key|
-      if Qualys::Config.instance_variable_get("@#{key}").nil?
-        raise Qualys::Config::RequiredOptionMissing,
-          "Configuration parameter missing: '#{key}'. " +
-          "Please add it to the Qualys.configure block"
-      end
+    %w[username password].each do |key|
+      next unless Qualys::Config.instance_variable_get("@#{key}").nil?
+      raise Qualys::Config::RequiredOptionMissing,
+            "Configuration parameter missing: '#{key}'. " \
+            'Please add it to the Qualys.configure block'
     end
   end
-  alias_method :config, :configure
-
+  alias config configure
 end

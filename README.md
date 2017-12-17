@@ -1,11 +1,9 @@
+[![Build Status](https://travis-ci.org/Cyberwatch/ruby-qualys.svg?branch=master)](https://travis-ci.org/Cyberwatch/ruby-qualys)
+[![Coverage Status](https://coveralls.io/repos/github/Cyberwatch/ruby-qualys/badge.svg?branch=master)](https://coveralls.io/github/Cyberwatch/ruby-qualys?branch=master)
+
 # Ruby Qualys API v2
+
 A Ruby extension for interfacing with Qualys v2 API.
-
-[![](http://ruby-gem-downloads-badge.herokuapp.com/qualys?type=total)](https://rubygems.org/gems/qualys)
-
-[![Dependency Status](https://gemnasium.com/mikemackintosh/ruby-qualys.svg)](https://gemnasium.com/mikemackintosh/ruby-qualys)
-
-[![Gem Version](https://badge.fury.io/rb/qualys.svg)](https://rubygems.org/gems/qualys)
 
 ### Introduction
 
@@ -13,11 +11,13 @@ I had the need to pull stats and details from Qualys automatically to collect an
 
 ## Installation
 
-Like any other gem:
+Add this line to your application's Gemfile:
 
-```shell
-gem install qualys
-```
+    gem 'ruby-qualys', git: 'https://github.com/Cyberwatch/ruby-qualys.git'
+
+And then execute:
+
+    $ bundle
 
 ## Usage
 
@@ -72,7 +72,47 @@ If your URL differs from the default, set it using:
 ```ruby
 Qualys::Api.base_uri = OTHER_PRODUCTION_ENDPOINT
 ```
+### Getting vulnerabilities
 
+You can load all vulnerability detected by qualys so far for the logged user
+Here an example printing some information on the vulnerabilities for two hosts :
+
+```ruby
+Qualys::Reports.global_report.hosts.each{ |host|
+  p "ip:#{ host.ip }"
+  p "vulns : (#{ host.vulnerabilities.count })"
+  host.vulnerabilities.each{ |vuln|
+    p vuln.to_s
+  }
+}
+```
+
+Output :
+```
+"ip:12.34.156.89"
+"vulns : (16)"
+"qid_38173, SSL Certificate - Signature Verification Failed Vulnerability, severity : 2, cves: no cve"
+"qid_38685, SSL Certificate - Invalid Maximum Validity Date Detected, severity : 2, cves: no cve"
+"qid_38169, SSL Certificate - Self-Signed Certificate, severity : 2, cves: no cve"
+"qid_38170, SSL Certificate - Subject Common Name Does Not Match Server FQDN, severity : 2, cves: no cve"
+"qid_38628, SSL/TLS Server supports TLSv1.0, severity : 3, cves: no cve"
+"qid_38601, SSL/TLS use of weak RC4 cipher, severity : 3, cves: CVE-2013-2566, CVE-2015-2808"
+"qid_38140, SSL Server Supports Weak Encryption Vulnerability, severity : 3, cves: no cve"
+"qid_38142, SSL Server Allows Anonymous Authentication Vulnerability, severity : 4, cves: no cve"
+"qid_38657, Birthday attacks against TLS ciphers with 64bit block size vulnerability (Sweet32), severity : 3, cves: CVE-2016-2183"
+"qid_38606, SSL Server Has SSLv3 Enabled Vulnerability, severity : 3, cves: no cve"
+"qid_82003, ICMP Timestamp Request, severity : 1, cves: CVE-1999-0524"
+"qid_38603, SSLv3 Padding Oracle Attack Information Disclosure Vulnerability (POODLE), severity : 3, cves: CVE-2014-3566"
+"qid_11827, HTTP Security Header Not Detected, severity : 2, cves: no cve"
+"qid_11827, HTTP Security Header Not Detected, severity : 2, cves: no cve"
+"qid_38628, SSL/TLS Server supports TLSv1.0, severity : 3, cves: no cve"
+"qid_38657, Birthday attacks against TLS ciphers with 64bit block size vulnerability (Sweet32), severity : 3, cves: CVE-2016-2183"
+"ip:10.34.156.89"
+"vulns : (3)"
+"qid_11827, HTTP Security Header Not Detected, severity : 2, cves: no cve"
+"qid_11827, HTTP Security Header Not Detected, severity : 2, cves: no cve"
+"qid_38628, SSL/TLS Server supports TLSv1.0, severity : 3, cves: no cve"
+```
 
 ## References
 
