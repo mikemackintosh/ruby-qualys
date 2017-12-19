@@ -68,7 +68,17 @@ RSpec.describe Qualys::Scan, type: :model do
       end
 
       VCR.use_cassette('scan') do
-        expect(error_scan.finished?).to be false
+        expect(error_scan.finished?).to be_falsey
+      end
+    end
+  end
+
+  describe '#hosts' do
+    it 'returns returns a ip list' do
+      VCR.use_cassette('scan') do
+        VCR.use_cassette('get') do
+          expect(scan.hosts).to eq %w[47.69.112.62]
+        end
       end
     end
   end

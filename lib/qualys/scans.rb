@@ -41,9 +41,11 @@ module Qualys
     end
 
     def finished?
-      return true if @status.eql? 'Finished'
+      @status == 'Finished'
+    end
 
-      false
+    def hosts
+      details.map { |host| host['ip'] }.uniq
     end
   end
 
