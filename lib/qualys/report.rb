@@ -9,7 +9,16 @@ module Qualys
     TIMEOUT = 60.0
 
     class << self
-      def find_by_id(id)
+      # returns the list of the templates
+      def templates
+        auth = { username: Qualys::Config.username, password: Qualys::Config.password }
+        response = HTTParty.get('https://qualysapi.qualys.eu/msp/report_template_list.php',
+                                basic_auth: auth)
+        response.parsed_response['REPORT_TEMPLATE_LIST']['REPORT_TEMPLATE']
+      end
+
+      # returns a report object from qualys api if a report with the required id exists
+      def fetch(id)
         response = api_get('/report/', query: {
                              action: 'fetch',
                              id: id
@@ -21,12 +30,19 @@ module Qualys
         Report.new(response.parsed_response)
       end
 
-      # returns the list of the templates
-      def templates
-        auth = { username: Qualys::Config.username, password: Qualys::Config.password }
-        response = HTTParty.get('https://qualysapi.qualys.eu/msp/report_template_list.php',
-                                basic_auth: auth)
-        response.parsed_response['REPORT_TEMPLATE_LIST']['REPORT_TEMPLATE']
+      # create a report for the selected ip adress if specified. ips is a array of strings
+      def launch(ips = nil)
+        scan_template = templates.detect { |template| template['TITLE'] == 'Technical Report' }
+        response = api_post('/report/', query: {
+          action: 'launch',
+          report_title: 'Generated_by_Ruby_Qualys_gem',
+          report_type: 'Scan',
+
+          output_format: 'xml',
+          template_id: scan_template['ID']
+        }.tap { |query| query[:ips] = ips.join(',') unless ips.nil? })
+
+        response.parsed_response['SIMPLE_RETURN']['RESPONSE']['ITEM_LIST']['ITEM']['VALUE']
       end
 
       def delete(id)
@@ -36,29 +52,16 @@ module Qualys
                  })
       end
 
-      # returns the id of the report
-      def create_global_report
-        scan_template = templates.detect { |template| template['TITLE'] == 'Technical Report' }
-        response = api_post('/report/', query: {
-                              action: 'launch',
-                              report_title: 'Generated_by_Ruby_Qualys_gem',
-                              report_type: 'Scan',
-                              output_format: 'xml',
-                              template_id: scan_template['ID']
-                            })
-
-        response.parsed_response['SIMPLE_RETURN']['RESPONSE']['ITEM_LIST']['ITEM']['VALUE']
-      end
-
-      # returns a report global report object.
+      # returns a report object for the hosts associated in a specific scan.
+      # If no scan in specified returns global report object.
       # This method can be time consuming and times out after 64 s
-      def global_report
-        report_id = create_global_report
-        report = find_by_id(report_id)
+      def create(ref = nil)
+        report_id = ref ? launch(Qualys::Scans.all.detect { |scan| scan.ref == ref }.hosts) : launch
+        report = fetch(report_id)
 
         10.times do
           sleep(TIMEOUT / 10)
-          report = find_by_id(report_id)
+          report = fetch(report_id)
           break unless report.nil?
         end
 
@@ -77,14 +80,14 @@ module Qualys
     end
 
     def hosts
-      hosts ||= host_list.map do |xml_host|
+      @host_list = [@host_list] unless @host_list.is_a?(Array)
+
+      @host_list.map do |xml_host|
         vulnerabilities = xml_host['VULN_INFO_LIST']['VULN_INFO'].map do |vuln|
           Qualys::Vulnerability.new(vuln, @glossary)
         end
         Qualys::Host.new(xml_host, vulnerabilities)
       end
-
-      hosts
     end
   end
 end

@@ -74,11 +74,13 @@ Qualys::Api.base_uri = OTHER_PRODUCTION_ENDPOINT
 ```
 ### Getting vulnerabilities
 
-You can load all vulnerability detected by qualys so far for the logged user
-Here an example printing some information on the vulnerabilities for two hosts :
+You can load the vulnerability detected by qualys for the hosts scanned by a specific scan
+if you don't specify any `scan_ref`, it prints all vulnerabilities detected by qualys so far for the logged user.
+Here an example printing some information on the vulnerabilities for the second scan of the logged user :
 
 ```ruby
-Qualys::Reports.global_report.hosts.each{ |host|
+scan_ref = Qualys::Scans.all[1].ref
+Qualys::Report.create(scan_ref).hosts.each{ |host|
   p "ip:#{ host.ip }"
   p "vulns : (#{ host.vulnerabilities.count })"
   host.vulnerabilities.each{ |vuln|

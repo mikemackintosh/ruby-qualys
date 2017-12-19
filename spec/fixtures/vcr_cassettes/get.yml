@@ -101,7 +101,8 @@ http_interactions:
         {"ip":"47.69.112.62","dns":"12.ip-34-56-789.ab","netbios":null,"qid":19000,"instance":null,"result":"5.5.58-0ubuntu0.14.04.1","protocol":"tcp","port":"3306","ssl":"no","fqdn":""},
         {"ip":"47.69.112.62","dns":"12.ip-34-56-789.ab","netbios":null,"qid":19570,"instance":null,"result":"5.5.58-0ubuntu0.14.04.1","protocol":"tcp","port":"3306","ssl":"no","fqdn":""},
         {"ip":"47.69.112.62","dns":"12.ip-34-56-789.ab","netbios":null,"qid":19568,"instance":null,"result":"MYSQL instance detected on TCP port 3306.","protocol":"tcp","port":"3306","ssl":"no","fqdn":""},
-        {"ip":"47.69.112.62","dns":"12.ip-34-56-789.ab","netbios":null,"qid":15004,"instance":null,"result":"ISC BIND 9.9.5-3ubuntu0.16-Ubuntu detected on port 53 over UDP.","protocol":"udp","port":"53","ssl":"no","fqdn":""}]
+        {"ip":"47.69.112.62","dns":"12.ip-34-56-789.ab","netbios":null,"qid":15004,"instance":null,"result":"ISC BIND 9.9.5-3ubuntu0.16-Ubuntu detected on port 53 over UDP.","protocol":"udp","port":"53","ssl":"no","fqdn":""},
+        {"ip":"47.69.112.62","dns":"12.ip-34-56-789.ab","netbios":null,"qid":82046,"instance":null,"result":"IP ID changes observed (network order) for port 21: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \nDuration: 32 milli seconds","protocol":"","port":"","ssl":"no","fqdn":""}]
     http_version: 
   recorded_at: Mon, 11 Dec 2017 10:44:59 GMT
 recorded_with: VCR 4.0.0
