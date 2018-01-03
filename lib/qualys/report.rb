@@ -31,7 +31,7 @@ module Qualys
       end
 
       # create a report for the selected ip adress if specified. ips is a array of strings
-      def launch(ips = nil)
+      def launch(ips = [])
         scan_template = templates.detect { |template| template['TITLE'] == 'Technical Report' }
         response = api_post('/report/', query: {
           action: 'launch',
@@ -40,7 +40,7 @@ module Qualys
 
           output_format: 'xml',
           template_id: scan_template['ID']
-        }.tap { |query| query[:ips] = ips.join(',') unless ips.nil? })
+        }.tap { |query| query[:ips] = ips.join(',') unless ips.empty? })
 
         response.parsed_response['SIMPLE_RETURN']['RESPONSE']['ITEM_LIST']['ITEM']['VALUE']
       end
@@ -56,7 +56,8 @@ module Qualys
       # If no scan in specified returns global report object.
       # This method can be time consuming and times out after 64 s
       def create(ref = nil)
-        report_id = ref ? launch(Qualys::Scans.all.detect { |scan| scan.ref == ref }.hosts) : launch
+        scan = Qualys::Scans.all.detect { |s| s.ref == ref } if ref
+        report_id = scan ? launch(scan.hosts) : launch
         report = fetch(report_id)
 
         10.times do
@@ -74,8 +75,18 @@ module Qualys
 
     def initialize(report)
       @header = report['ASSET_DATA_REPORT']['HEADER']
-      @host_list = report['ASSET_DATA_REPORT']['HOST_LIST']['HOST']
-      @glossary = report['ASSET_DATA_REPORT']['GLOSSARY']['VULN_DETAILS_LIST']['VULN_DETAILS']
+      @host_list = if report['ASSET_DATA_REPORT']['HOST_LIST']
+                     report['ASSET_DATA_REPORT']['HOST_LIST']['HOST']
+                   else
+                     []
+                   end
+
+      @glossary = if report['ASSET_DATA_REPORT']['GLOSSARY']
+                    report['ASSET_DATA_REPORT']['GLOSSARY']['VULN_DETAILS_LIST']['VULN_DETAILS']
+                  else
+                    []
+                  end
+
       @appendices = report['ASSET_DATA_REPORT']['APPENDICES']
     end
 
