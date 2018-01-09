@@ -30,13 +30,14 @@ Before utilizing the API, you must configure it. You can configure it with a blo
 Qualys.configure do |config|
   config.username = @email
   config.password = @password
+  config.api_base_uri = 'https://qualysapi.qualys.eu/api/2.0/fo/'
 end
 ```
 
 or configure using a `yaml` doc:
 
 ```ruby
-Qualys::Config.load!("config/qualys.yaml")
+Qualys::Config.load!('config/qualys.yaml')
 ```
 ### Login
 
@@ -72,6 +73,7 @@ If your URL differs from the default, set it using:
 ```ruby
 Qualys::Api.base_uri = OTHER_PRODUCTION_ENDPOINT
 ```
+
 ### Getting vulnerabilities
 
 You can load the vulnerability detected by qualys for the hosts scanned by a specific scan

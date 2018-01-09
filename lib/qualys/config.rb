@@ -3,7 +3,7 @@ module Qualys
     class RequiredOptionMissing < RuntimeError; end
     extend self
 
-    attr_accessor :username, :password, :session_key
+    attr_accessor :username, :password, :api_base_uri, :session_key
 
     # Configure Qualys from a hash. This is usually called after parsing a
     # yaml config file such as qualys.yaml.
