@@ -31,6 +31,7 @@ Qualys.configure do |config|
   config.username = @email
   config.password = @password
   config.api_base_uri = 'https://qualysapi.qualys.eu/api/2.0/fo/'
+  config.proxy_uri = 'http://user:password@localhost:3128'
 end
 ```
 
