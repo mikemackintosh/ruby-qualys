@@ -14,6 +14,7 @@ describe Qualys do
         Qualys.configure do |config|
           config.username = 'Thomas'
           config.password = 'verysafepass'
+          config.proxy_uri = 'https://test:password@example.com'
           config.api_base_uri = 'https://qualysapi.qualys.eu/api/2.0/fo/'
         end
       end.not_to raise_error
