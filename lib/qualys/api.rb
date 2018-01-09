@@ -9,11 +9,13 @@ module Qualys
 
     class << self
       def api_get(url, options = {})
-        HTTParty::Basement.default_options.update(headers: {
-                                                    'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}"
-                                                  })
-        HTTParty::Basement.default_options.update(base_uri: base_uri)
-        HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key) unless Qualys::Config.session_key.nil?
+        options = {
+          headers: {
+            'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}",
+            'Cookie' => Qualys::Config.session_key
+          },
+          base_uri: base_uri
+        }.merge(options)
 
         # Send Request
         response = HTTParty.get(url, options)
@@ -27,11 +29,13 @@ module Qualys
       #
       #
       def api_post(url, options = {})
-        HTTParty::Basement.default_options.update(headers: {
-                                                    'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}"
-                                                  })
-        HTTParty::Basement.default_options.update(base_uri: base_uri)
-        HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key) unless Qualys::Config.session_key.nil?
+        options = {
+          headers: {
+            'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}",
+            'Cookie' => Qualys::Config.session_key
+          },
+          base_uri: base_uri
+        }.merge(options)
 
         # Send Request
         response = HTTParty.post(url, options)
