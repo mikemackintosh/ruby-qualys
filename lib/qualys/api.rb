@@ -7,14 +7,12 @@ module Qualys
     # Set the current production endpoint
     PRODUCTION_ENDPOINT = 'https://qualysapi.qualys.com/api/2.0/fo/'.freeze
 
-    # Set HTTParty defaults
-    HTTParty::Basement.default_options.update(base_uri: PRODUCTION_ENDPOINT)
-    HTTParty::Basement.default_options.update(headers: {
-                                                'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}"
-                                              })
-
     class << self
       def api_get(url, options = {})
+        HTTParty::Basement.default_options.update(headers: {
+                                                    'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}"
+                                                  })
+        HTTParty::Basement.default_options.update(base_uri: base_uri)
         HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key) unless Qualys::Config.session_key.nil?
 
         # Send Request
@@ -29,6 +27,10 @@ module Qualys
       #
       #
       def api_post(url, options = {})
+        HTTParty::Basement.default_options.update(headers: {
+                                                    'X-Requested-With' => "Qualys Ruby Client v#{Qualys::VERSION}"
+                                                  })
+        HTTParty::Basement.default_options.update(base_uri: base_uri)
         HTTParty::Basement.default_cookies.add_cookies(Qualys::Config.session_key) unless Qualys::Config.session_key.nil?
 
         # Send Request
@@ -43,10 +45,14 @@ module Qualys
       #
       # Sets the base URI.
       def base_uri=(base_uri)
-        HTTParty::Basement.default_options.update(base_uri: base_uri)
+        Qualys::Config.api_base_uri = base_uri
       end
 
       private
+
+      def base_uri
+        Qualys::Config.api_base_uri.nil? ? PRODUCTION_ENDPOINT : Qualys::Config.api_base_uri
+      end
 
       def check_response(response)
         code = response.code
