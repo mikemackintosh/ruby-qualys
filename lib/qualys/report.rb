@@ -12,8 +12,7 @@ module Qualys
       # returns the list of the templates
       def templates
         auth = { username: Qualys::Config.username, password: Qualys::Config.password }
-        response = HTTParty.get('https://qualysapi.qualys.eu/msp/report_template_list.php',
-                                basic_auth: auth)
+        response = api_get('https://qualysapi.qualys.eu/msp/report_template_list.php', basic_auth: auth)
         response.parsed_response['REPORT_TEMPLATE_LIST']['REPORT_TEMPLATE']
       end
 
