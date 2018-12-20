@@ -20,9 +20,8 @@ RSpec.configure do |config|
     Qualys.configure do |qualys_config|
       qualys_config.username = 'Thomas'
       qualys_config.password = 'thomasPassword'
+      qualys_config.api_base_uri = 'https://qualysapi.qualys.eu/api/2.0/fo/'
     end
-
-    Qualys::Api.base_uri = 'https://qualysapi.qualys.eu/api/2.0/fo/'
 
     VCR.use_cassette('login') do
       Qualys::Auth.login

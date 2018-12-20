@@ -7,6 +7,11 @@ module Qualys
       end
 
       scanlist = response.parsed_response['SCAN_LIST_OUTPUT']['RESPONSE']['SCAN_LIST']['SCAN']
+
+      # When an instance only has one scan, scanlist returns just a Hash instead of an Array of hashes, so we must
+      # manually set it in an Array.
+      scanlist = [scanlist] unless scanlist.is_a? Array
+
       scanlist.map! { |scan| Scan.new(scan) }
     end
 
@@ -41,9 +46,11 @@ module Qualys
     end
 
     def finished?
-      return true if @status.eql? 'Finished'
+      @status == 'Finished'
+    end
 
-      false
+    def hosts
+      details.map { |host| host['ip'] }.uniq
     end
   end
 
